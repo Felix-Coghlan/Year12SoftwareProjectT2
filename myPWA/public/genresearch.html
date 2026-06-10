@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Felix's Game Searcher</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/x-icon" href="/images/icon2.png">
+  </head>
+  <body>
+    <main>
+      <nav>
+        <h1 class="headline">Game Searcher - Genre</h1>
+        <a href="index.html"><img src="images/house.png" width="50" height="50"/></a>
+        <button class="topbutton" onclick="toggleNightMode()"><img src="images/moon.png" width="50" height="50"></button>
+        <button class="topbutton" onclick="fontincrease()"><img src="images/plus.png" width="50" height="50"></button>
+        <br>
+        <br>
+        <br>
+        <form>
+          <input type="text" id="broadsearch">
+          <button onclick="genresearch(); return false"><b>Search</b></button>
+        </form>
+      </nav>
+      <div class="font-target container">
+
+      </div>
+
+
+    </main>
+    <script src="js/app.js"></script>
+    <script>
+      function fontincrease() {
+          // Use querySelectorAll to get ALL elements with the class 'font-target'
+          const targets = document.querySelectorAll('.font-target');
+
+          // Loop through the list of elements and toggle the class on each one
+          targets.forEach(target => {
+            target.classList.toggle('active-style');
+          });
+        }
+
+        function toggleNightMode() {
+          // Toggles the 'dark-mode' class directly on the entire body element
+          document.body.classList.toggle('dark-mode');
+        }
+    </script>
+  </body>
+</html>
