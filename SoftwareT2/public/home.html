@@ -10,47 +10,77 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" type="image/x-icon" href="images/icon2.png">
   </head>
-  <body>
+  <body onload="accessibilityRun()">
     <main>
       <nav>
         <h1 class="headline">Swim assistant - Home</h1>
-        <a href="index.html"><img src="images/house.png" width="50" height="50"/></a>
+        <a href="home.html"><img src="images/house.png" width="50" height="50"/></a>
         <button class="topbutton" onclick="toggleNightMode()"><img src="images/moon.png" width="50" height="50"></button>
         <button class="topbutton" onclick="fontincrease()"><img src="images/plus.png" width="50" height="50"></button>
         <img src="images/banner.png" width="1520" height="200"/>
         <ul class="topnav">
-          <li><a href="mainsearch.html">Main Search</a></li> <!-- Change to official names --> 
-          <li><a href="genresearch.html">Genre Search</a></li> <!-- Change to official names -->
+          <li><a href="login.html">Login</a></li>  
+          <li class="font-target">Login to use this service</li>
           <br>
           <br>
-          <li class="font-target">Check out the games on this website using names to search, filtering based on preference</li>
-          <li class="font-target">Look through games that fit under certain genres</li>
+          <li><a href="register.html">Register</a></li> 
+          <li class="font-target">Don't have an account?</li>
           <br>
           <br>
           <br>
           <h1>About</h1>
-          <li class="font-target">This project is designed to create a website holding a database for games that allows you to search for specific games in a variety of ways, such as by name, and developer whilst also putting constraints like genre, release date and compatibility with multiplayer. This project will use github codespaces and repositories to carry out the project, with the website running universally on every website. As for hardware, my personal laptop will be used for coding and my home computer and phone will be used for testing the website in a variety of circumstances. The success of this project will be measured by: how well the user can find games within the website using both narrow and wide searches, enable the discovery of new games, manage accessibility options with website clarity and allow the user to seamlessly use the website with both palatable visuals and understandable UI. 
-</li>
+          <li class="font-target">This project is designed to create a website holding a database for games that allows you to search for specific games in a variety of ways, such as by name, and developer whilst also putting constraints like genre, release date and compatibility with multiplayer. This project will use github codespaces and repositories to carry out the project, with the website running universally on every website. As for hardware, my personal laptop will be used for coding and my home computer and phone will be used for testing the website in a variety of circumstances. The success of this project will be measured by: how well the user can find games within the website using both narrow and wide searches, enable the discovery of new games, manage accessibility options with website clarity and allow the user to seamlessly use the website with both palatable visuals and understandable UI. </li>
         </ul>
       </nav>
-      <div class="container">
-        
-      </div>
+      
       <script>
         function fontincrease() {
-          // Use querySelectorAll to get ALL elements with the class 'font-target'
-          const targets = document.querySelectorAll('.font-target');
-
           // Loop through the list of elements and toggle the class on each one
-          targets.forEach(target => {
-            target.classList.toggle('active-style');
-          });
-        }
+          if (sessionStorage.getItem('Zoom') === 't'){
+            // Use querySelectorAll to get ALL elements with the class 'font-target'
+            const targets = document.querySelectorAll('.font-target');
+            targets.forEach(target => {
+              target.classList.toggle('active-style');
+            });
+            sessionStorage.setItem('Zoom', 'f')
+          } else {
+            // Use querySelectorAll to get ALL elements with the class 'font-target'
+            const targets = document.querySelectorAll('.font-target');
+            targets.forEach(target => {
+              target.classList.toggle('active-style');
+            });
+            sessionStorage.setItem('Zoom', 't')
+          }
+          
+        };
 
         function toggleNightMode() {
           // Toggles the 'dark-mode' class directly on the entire body element
-          document.body.classList.toggle('dark-mode');
-        }
+          if (sessionStorage.getItem('DarkMode') === 't'){
+            sessionStorage.setItem('DarkMode', 'f');
+            document.body.classList.toggle('dark-mode');
+          } else {
+            document.body.classList.toggle('dark-mode');
+            sessionStorage.setItem('DarkMode', 't');
+          }
+        };  
+
+        function accessibilityRun(){
+          if (sessionStorage.getItem('DarkMode') === null){
+            sessionStorage.setItem('DarkMode', 'f');
+            sessionStorage.setItem('Zoom', 'f');
+          };
+          if (sessionStorage.getItem('DarkMode') === 't'){
+            document.body.classList.toggle('dark-mode');
+          };
+          if (sessionStorage.getItem('Zoom') === 't') {
+            console.log('Zoom activated!')
+            const targets = document.querySelectorAll('.font-target');
+            targets.forEach(target => {
+              target.classList.toggle('active-style');
+            });
+          };
+        };
       </script>
 
     </main>

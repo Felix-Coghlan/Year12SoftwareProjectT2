@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Swim Assistant</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/x-icon" href="images/icon2.png">
+  </head>
+  <body onload="accessibilityRun()">
+    <main>
+      <nav>
+        <h1 class="headline">Swim assistant - Registration</h1>
+        <a href="home.html"><img src="images/house.png" width="50" height="50"/></a>
+        <button class="topbutton" onclick="toggleNightMode()"><img src="images/moon.png" width="50" height="50"></button>
+        <button class="topbutton" onclick="fontincrease()"><img src="images/plus.png" width="50" height="50"></button>
+        <img src="images/banner.png" width="1520" height="200"/>
+
+        <form>
+          <input type="text" id="username" placeholder="Choose Username">
+          <br> <br>
+          <input type="text" id="password" placeholder="Choose Password">
+          <br> <br>
+          <button onclick="generateAccount(); return false"><b>Submit</b></button>
+        </form>
+      </nav>
+      <div class="font-target container">
+        
+      </div>
+      <script src="js/app.js"></script>
+      <script>
+          function fontincrease() {
+          // Use querySelectorAll to get ALL elements with the class 'font-target'
+          const targets = document.querySelectorAll('.font-target');
+
+          // Loop through the list of elements and toggle the class on each one
+          if (sessionStorage.getItem('Zoom') === 't'){
+            targets.forEach(target => {
+              target.classList.toggle('active-style');
+            });
+            sessionStorage.setItem('Zoom', 'f')
+          } else {
+            targets.forEach(target => {
+              target.classList.toggle('active-style');
+            });
+            sessionStorage.setItem('Zoom', 't')
+          }
+          
+        };
+
+        function toggleNightMode() {
+          // Toggles the 'dark-mode' class directly on the entire body element
+          if (sessionStorage.getItem('DarkMode') === 't'){
+            sessionStorage.setItem('DarkMode', 'f');
+            document.body.classList.toggle('dark-mode');
+          } else {
+            document.body.classList.toggle('dark-mode');
+            sessionStorage.setItem('DarkMode', 't');
+          }
+        };  
+
+        function accessibilityRun(){
+          if (sessionStorage.getItem('DarkMode') === 't'){
+            document.body.classList.toggle('dark-mode');
+          }
+          if (sessionStorage.getItem('Zoom') === 't'); {
+            const targets = document.querySelectorAll('.font-target');
+            targets.forEach(target => {
+              target.classList.toggle('active-style');
+            });
+          }
+        };
+      </script>
+
+    </main>
+  </body>
+</html>
