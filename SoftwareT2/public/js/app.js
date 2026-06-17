@@ -127,6 +127,7 @@ function loadStudents(StudentArray){
             <p><strong>Class:</strong> ${student.class}</p>
             <p><strong>Skill Level:</strong> ${student.skill}</p>
             <button id="${student.name}" onclick="loadStudentsPage('${student.name}'); return false"><b>go to student page</b></button>
+            <br></br>
         </div>
         `;
     }).join(''); // Join all HTML snippets together
@@ -265,19 +266,21 @@ function loadChecklists(ChecklistsArray) {
         <div class="container3">
             <form>
                 <input type="checkbox" id="safeentry" name="safeentry" value="1" ${(check.safeentry) === '1' ? 'checked' : ''}>
-                <label for="task1">Safe Entry</label>
+                <label for="safeentry">Safe Entry</label>
                 <input type="checkbox" id="treading" name="treading" value="1" ${(check.treading) === '1' ? 'checked' : '' }>
-                <label for="task1">Treading</label>
+                <label for="treading">Treading</label>
                 <input type="checkbox" id="backfloat" name="backfloat" value="1" ${(check.backfloat) === '1' ? 'checked' : '' }>
-                <label for="task1">Back float</label>
+                <label for="backfloat">Back float</label>
+                <br></br>
                 <input type="checkbox" id="backscull" name="backscull" value="1" ${(check.backscull) === '1' ? 'checked' : '' }>
-                <label for="task1">Back Scull</label>
+                <label for="backscull">Back Scull</label>
                 <input type="checkbox" id="duckdive" name="duckdive" value="1" ${(check.duckdive) === '1' ? 'checked' : '' }>
-                <label for="task1">Duck Dive</label>
+                <label for="duckdive">Duck Dive</label>
+                <br></br>
                 <input type="checkbox" id="paddling" name="paddling" value="1" ${(check.paddling) === '1' ? 'checked' : '' }>
-                <label for="task1">Paddling</label>
+                <label for="paddling">Paddling</label>
                 <input type="checkbox" id="freestyle" name="freestyle" value="1" ${(check.freestyle) === '1' ? 'checked' : '' }>
-                <label for="task1">Freestyle</label>
+                <label for="freestyle">Freestyle</label>
                 <button onclick="readChecks(); return false"><b>Submit</b></button>
             </form> 
             <br></br>

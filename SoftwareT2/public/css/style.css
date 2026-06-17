@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 body {
-  background: #fffdfd;
+  background: #e4fdff;
   font-family: "Nunito", sans-serif;
   font-size: 1rem;
 }
@@ -38,11 +38,11 @@ nav ul li a {
     font-size: 2rem;
   }
 nav ul li a:hover {
-    color: #14E6DD;
+    color: #50bbed;
     font-size: 2.2rem;
 }
 nav h1 {
-    color: #106D69;
+    color: #092257;
     margin-bottom: 0.5rem;
     float: left;
 }
@@ -85,20 +85,20 @@ nav h2 {
 }
 
 body.dark-mode {
-  background-color: #121212; /* Dark background color */
-  color: #f5f5f5;             /* Light text color */
+  background-color: #020b37; /* Dark background color */
+  color: #9ed5ff;             /* Light text color */
 }
 
 body.dark-mode ul li a {
-    color: #14E6DD;
+    color: #3593eb;
 }
 
 body.dark-mode a {
-    color: #14E6DD;
+    color: #3593eb;
 }
 
 body.dark-mode h1 {
-    color: #14E6DD;
+    color: #3593eb;
 }
 
 body.dark-mode .topbutton {
@@ -130,7 +130,7 @@ body.dark-mode a img {
   align-items: center;
   text-align: left;
   margin: 0.75rem;
-  padding: 0.75rem 0;
+  padding: 0.1rem 0;
   }
 
   .container2 {
@@ -154,7 +154,7 @@ body.dark-mode a img {
   align-items: center;
   text-align: left;
   margin: 0.75rem;
-  padding: 0.75rem 0;
+  padding: 0.75rem;
   }
 .card {
   display: flex;
