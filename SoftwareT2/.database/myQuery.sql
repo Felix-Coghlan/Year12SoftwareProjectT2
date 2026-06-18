@@ -7,7 +7,7 @@
 -- DELETE FROM Accounts WHERE ID>1;
 
 -- SELECT * FROM Accounts;
--- SELECT * FROM Students;
+SELECT * FROM Students;
 -- SELECT * FROM Records;
 -- SELECT * FROM Checklist;
 

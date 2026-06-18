@@ -1,8 +1,10 @@
 function generateAccount() {
+    // gets login information
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; // Regex that checks there is no special characters
 
+    // ifs sanitises data
     if (username.length > 0 && username.length < 50 && !format.test(username)) {
         if (password.length > 8 && password.length < 100 && !format.test(password)){
             fetch('/send', {
@@ -26,6 +28,7 @@ function generateAccount() {
 
 function LoginAccount() {
     event.preventDefault();
+    // Login data
     const LoginUsername = document.getElementById("usernameLOGIN").value;
     const LoginPassword = document.getElementById("passwordLOGIN").value;
     var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/; // Regex that checks there is no special characters
@@ -45,13 +48,13 @@ function LoginAccount() {
             })
             .then(res => res.json())
             .then(LoginData => {
-                LoginConfirmation(LoginData, LoginPassword);
+                LoginConfirmation(LoginData, LoginPassword); // Calls to confirm data
             })
 
             .catch(err => console.error(err));
         
         } else{
-            ocument.querySelector(".container").innerHTML = '<p>Username/Password invalid, please try again </p>'
+            document.querySelector(".container").innerHTML = '<p>Username/Password invalid, please try again </p>'
         }
 
     } else {
@@ -60,6 +63,7 @@ function LoginAccount() {
 }
 
 function LoginConfirmation(LoginData, LoginPassword) {
+    // Self explanatory, once authenticated takes the user to student records page and sets the user for the other functions
     console.log(LoginData.password);
     console.log(LoginPassword);
     if (LoginData.password === LoginPassword) {
@@ -90,11 +94,11 @@ function registerStudent() {
     
     document.querySelector(".container").innerHTML = '<p>Student Uploaded! You can reuse this form as many times as needed for your students</p>';
     
-
 };
 
 function loadStudentsGrab(){
-    const Owner = sessionStorage.getItem("user")
+    // Grabs the students for the student records page
+    const Owner = sessionStorage.getItem("user");
 
     fetch('/students', {
         method: 'POST',
@@ -112,6 +116,7 @@ function loadStudentsGrab(){
 };
 
 function loadStudents(StudentArray){
+    // uses loadStudentsGrab information to loaf the students into the page
     if (!StudentArray || StudentArray.length === 0) {
         document.querySelector(".container").innerHTML = '<p>No students found. Register a student to begin using the program</p>';
         return; // Exit the function
@@ -130,7 +135,8 @@ function loadStudents(StudentArray){
             <br></br>
         </div>
         `;
-    }).join(''); // Join all HTML snippets together
+    }).join(''); // Joins all HTML snippets together
+    // Runs the accessibility because the onload is occupied
     document.querySelector(".container").innerHTML = result;
     if (sessionStorage.getItem('DarkMode') === 't'){
             document.body.classList.toggle('dark-mode');
@@ -143,7 +149,7 @@ function loadStudents(StudentArray){
     }
 };
 
-// For the studentpage
+// For the studentpage, no button 
 function loadStudents2(StudentArray){
     if (!StudentArray || StudentArray.length === 0) {
         document.querySelector(".container").innerHTML = '<p>No students found. Register a student to begin using the program</p>';
@@ -161,7 +167,7 @@ function loadStudents2(StudentArray){
             <p><strong>Skill Level:</strong> ${student.skill}</p>
         </div>
         `;
-    }).join(''); // Join all HTML snippets together
+    }).join(''); // Joins all HTML snippets together
     document.querySelector(".container").innerHTML = result;
 };
 
@@ -182,6 +188,7 @@ function studentPageData() {
     });
     }
     
+    // Grab standard data
     const Student = sessionStorage.getItem("Student")
     fetch('/studentsdata', {
         method: 'POST',
@@ -210,6 +217,7 @@ function studentPageData() {
     })
     .catch(err => console.error(err));
 
+    // Andddd finally grab the checklist
     fetch('/checklist', {
         method: 'POST',
         headers: {
@@ -222,8 +230,6 @@ function studentPageData() {
         loadChecklists(ChecklistsArray);
     })
     .catch(err => console.error(err));
-
-    // continue for - records, then once again for checklist
 };
 
 function loadRecords(RecordsArray) {
@@ -239,11 +245,12 @@ function loadRecords(RecordsArray) {
             <br></br>
         </div>
         `;
-    }).join(''); // Join all HTML snippets together
+    }).join(''); // Joins all HTML snippets together
     document.querySelector(".container2").innerHTML = result;
 };
 
 function loadChecklists(ChecklistsArray) {
+    // if a student doesnt yet have a checklist page then instantly creates one and loads it using recursion
     if (!ChecklistsArray || ChecklistsArray.length === 0) {
         const student = sessionStorage.getItem('Student')
         fetch('/checklistMake', {
@@ -290,7 +297,7 @@ function loadChecklists(ChecklistsArray) {
     document.querySelector(".container3").innerHTML = result;
 };
 
-
+// Grabs document and puts it in the repo
 function readRecord(){
     const file = document.getElementById("textFile").value;
 
@@ -306,6 +313,7 @@ function readRecord(){
     
 };
 
+// Reads the file
 function uploadFile() {
     const formdata = new FormData();
     const student = sessionStorage.getItem('Student');
@@ -323,6 +331,7 @@ function uploadFile() {
     
 };
 
+// Reads in the checklist data into SQL
 function readChecks() {
     const safeentry = document.getElementById("safeentry").checked;
     const treading = document.getElementById("treading").checked;

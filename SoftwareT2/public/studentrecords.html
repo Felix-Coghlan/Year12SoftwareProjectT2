@@ -57,17 +57,6 @@
           }
         };  
 
-        function accessibilityRun(){
-          if (sessionStorage.getItem('DarkMode') === 't'){
-            document.body.classList.toggle('dark-mode');
-          }
-          if (sessionStorage.getItem('Zoom') === 't') {
-            const targets = document.querySelectorAll('.font-target');
-            targets.forEach(target => {
-              target.classList.toggle('active-style');
-            });
-          }
-        };
       </script>
 
     </main>

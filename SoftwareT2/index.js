@@ -2,10 +2,11 @@ const express = require("express");
 const sqlite = require('sqlite3');
 const path = require("path");
 const app = express();
-const fs = require("fs");
+const fs = require("fs"); // reads in files
 
 app.use(express.json()); 
 
+// Registration
 app.post("/send", (req, res) => {
   const { username, password } = req.body;
   console.log('I got a request!')
@@ -32,6 +33,7 @@ app.post("/send", (req, res) => {
 });
 
 
+// Login
 app.post("/search", (req, res) => {
   const { LoginUsername, LoginPassword } = req.body;
   console.log('I got a login request!');
@@ -50,8 +52,6 @@ app.post("/search", (req, res) => {
   });
   
   
-
-
   db.get("SELECT username, password FROM Accounts WHERE username=?", [LoginUsername], (err, rows) => {
     if (err) {
       console.error(err.message);
@@ -65,6 +65,7 @@ app.post("/search", (req, res) => {
   });
 });
 
+// Student Registration
 app.post("/student", (req, res) => {
   const { Owner, Name, Age, Class, Skill } = req.body;
   const dbPath = path.join(__dirname, ".database/datasource.db");
@@ -86,7 +87,7 @@ app.post("/student", (req, res) => {
     });
 });
 
-
+// Grabs student data
 app.post("/students", (req, res) => {
   const {Owner} = req.body;
   
@@ -115,6 +116,7 @@ app.post("/students", (req, res) => {
   });
 });
 
+//  Grabs student based on their name, not on the owner
 app.post("/studentsdata", (req, res) => {
   const {Student} = req.body;
   
@@ -143,6 +145,7 @@ app.post("/studentsdata", (req, res) => {
   });
 });
 
+// Grabs all records
 app.post("/records", (req, res) => {
   const {Student} = req.body;
   
@@ -171,6 +174,7 @@ app.post("/records", (req, res) => {
   });
 });
 
+// Grabs all checklist data
 app.post("/checklist", (req, res) => {
   const {Student} = req.body;
   
@@ -199,6 +203,7 @@ app.post("/checklist", (req, res) => {
   });
 });
 
+// Middleware for uploading
 const multer  = require('multer')
 const upload = multer({ dest: './public/uploads/' })
 
@@ -229,10 +234,12 @@ app.post('/upload', upload.single('avatar'), function (req, res) {
   });
 
   fs.unlink(filePath, function(err) {
-    
+    // Removes the file after finished reading
   });
 });
 
+
+// Reads in checklist data to update values
 app.post("/checklistread", (req, res) => {
   const { student, safeentry, treading, backfloat, backscull, duckdive, paddling, freestyle } = req.body;
   
@@ -254,6 +261,8 @@ WHERE student = ?`;
   });
 });
 
+
+// Makes the checklists for students
 app.post("/checklistMake", (req, res) => {
   const { student } = req.body;
   
@@ -291,7 +300,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "public/home.html"));
 });
-
 
 
 app.use(express.static(path.join(__dirname, ".database")));
